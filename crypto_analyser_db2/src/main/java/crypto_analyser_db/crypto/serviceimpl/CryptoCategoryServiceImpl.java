@@ -58,7 +58,7 @@ public  class CryptoCategoryServiceImpl implements CryptoCategoryService {
      * @return an Optional containing the found CryptoCategory, or an empty Optional if not found
      */
     @Override
-    public   List<CryptoCategory> getCategoryByName(String categoryName) {
+    public CryptoCategory getCategoryByName(String categoryName) {
         return categoryRepository.findByCategoryName(categoryName);
     }
 

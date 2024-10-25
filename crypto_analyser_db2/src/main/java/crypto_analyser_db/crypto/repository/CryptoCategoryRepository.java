@@ -8,6 +8,5 @@ import java.util.Optional;
 
 public interface CryptoCategoryRepository extends CrudRepository<CryptoCategory, Long> {
     
-    // Find a category by its name
-    List<CryptoCategory> findByCategoryName(String categoryName);
+	CryptoCategory findByCategoryName(String categoryName);
 }

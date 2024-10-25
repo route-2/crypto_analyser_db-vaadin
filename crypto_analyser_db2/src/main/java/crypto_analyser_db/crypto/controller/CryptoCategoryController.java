@@ -35,15 +35,15 @@ public class CryptoCategoryController {
                        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
- // Get categories by name
+ // Get category by name
     @GetMapping("/name/{categoryName}")
-    public ResponseEntity<List<CryptoCategory>> getCategoryByName(@PathVariable String categoryName) {
-        List<CryptoCategory> categories = categoryService.getCategoryByName(categoryName);
+    public ResponseEntity<CryptoCategory> getCategoryByName(@PathVariable String categoryName) {
+        CryptoCategory category = categoryService.getCategoryByName(categoryName); // Change the method to return a single category
         
-        if (categories.isEmpty()) {
+        if (category == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(categories, HttpStatus.OK);
+            return new ResponseEntity<>(category, HttpStatus.OK);
         }
     }
 

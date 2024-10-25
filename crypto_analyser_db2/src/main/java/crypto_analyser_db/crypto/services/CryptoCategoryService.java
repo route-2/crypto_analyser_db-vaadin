@@ -15,7 +15,7 @@ public interface CryptoCategoryService {
 
     Optional<CryptoCategory> getCategoryById(Long id);
 
-    List<CryptoCategory> getCategoryByName(String categoryName);
+    CryptoCategory getCategoryByName(String categoryName);
 
     CryptoCategory addCategory(CryptoCategory category);
 

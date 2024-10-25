@@ -11,11 +11,6 @@ import java.util.Set;
 @Entity
 @Table(name = "crypto_category")
 public class CryptoCategory {
-	
-	public CryptoCategory(Long id, String categoryName) {
-	    this.id = id;
-	    this.categoryName = categoryName;
-	}
 
     /**
      * The unique identifier for the CryptoCategory.
@@ -24,18 +19,14 @@ public class CryptoCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    /**
-     * The name of the category (deprecated; use categoryName).
-     * This field is not used but kept for reference.
-     */
-    private String name;
 
     /**
      * The name of the category, must be unique and not null.
      */
     @Column(name = "category_name", nullable = false, unique = true)
     private String categoryName;
+    
+    private String name;
 
     /**
      * A set of CryptoModel instances that belong to this category.
@@ -93,6 +84,24 @@ public class CryptoCategory {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+    
+    /**
+     * Gets the name of the category.
+     * 
+     * @return the name of the category
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name of the category.
+     * 
+     * @param categoryName the name to set for the category
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * Gets the set of cryptocurrencies that belong to this category.
@@ -111,10 +120,4 @@ public class CryptoCategory {
     public void setCryptocurrencies(Set<CryptoModel> cryptocurrencies) {
         this.cryptocurrencies = cryptocurrencies;
     }
-
-	
-
-	
-
-	
 }

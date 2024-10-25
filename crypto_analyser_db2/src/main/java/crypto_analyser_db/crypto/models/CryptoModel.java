@@ -20,7 +20,7 @@ import jakarta.persistence.Table;
 @Table(name="crypto")  // Maps this class to the "crypto" table in the database
 public class CryptoModel {
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_name", nullable = false)
     private CryptoCategory category;
 	
 	

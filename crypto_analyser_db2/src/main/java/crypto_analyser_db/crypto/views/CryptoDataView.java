@@ -7,10 +7,12 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
 import crypto_analyser_db.crypto.models.CryptoModel;
 import crypto_analyser_db.crypto.services.CryptoService;
+import jakarta.annotation.security.PermitAll;
 
 import java.util.List;
 
 @Route("crypto")
+@PermitAll
 public class CryptoDataView extends VerticalLayout {
 
     private static final long serialVersionUID = 1L;

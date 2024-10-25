@@ -1,19 +1,19 @@
 package crypto_analyser_db.crypto.requests;
 
 public class CategoryRequest {
-    private String name;
+    private String categoryName;
 
     public CategoryRequest() {}
 
     public CategoryRequest(String name) {
-        this.name = name;
+        this.categoryName = name;
     }
 
     public String getName() {
-        return name;
+        return categoryName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.categoryName = name;
     }
 }

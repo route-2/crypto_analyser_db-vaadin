@@ -34,7 +34,7 @@ public class CryptoCategoryView extends VerticalLayout {
     }
 
     private void configureGrid() {
-        grid.setColumns("id", "name"); // Set the columns to display
+    	grid.setColumns("id", "categoryName"); // Use "categoryName" if that's the actual field name
         grid.asSingleSelect().addValueChangeListener(event -> {
             CryptoCategory selectedCategory = event.getValue();
             categoryForm.setCategory(selectedCategory); // Populate form with selected category
