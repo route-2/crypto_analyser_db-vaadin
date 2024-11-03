@@ -82,10 +82,20 @@ public  class CryptoCategoryServiceImpl implements CryptoCategoryService {
      */
  
     @Override
-    public CryptoCategory updateCategory(Long id, CryptoCategory category) {
+    public CryptoCategory updateCategory(Long id, CryptoCategory updatedCategory) {
+        // Check if the category exists
         if (categoryRepository.existsById(id)) {
-            category.setId(id); // Set the ID to ensure the correct category is updated
-            return categoryRepository.save(category);
+            // Fetch the existing category
+            CryptoCategory existingCategory = categoryRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Category with id " + id + " not found."));
+
+            // Update the fields you want to change
+            existingCategory.setCategoryName(updatedCategory.getCategoryName());
+
+            // If you have collections, ensure they're still managed properly
+            // For example, you might want to merge or adjust them here if needed
+
+            return categoryRepository.save(existingCategory); // Save the updated entity
         }
         throw new RuntimeException("Category with id " + id + " not found.");
     }
@@ -99,11 +109,26 @@ public  class CryptoCategoryServiceImpl implements CryptoCategoryService {
      * @throws RuntimeException if the category with the specified id is not found
      */
     @Override
+    @Transactional
     public void deleteCategory(Long id) {
-        if (categoryRepository.existsById(id)) {
-            categoryRepository.deleteById(id);
+        Optional<CryptoCategory> categoryOptional = categoryRepository.findById(id);
+        if (categoryOptional.isPresent()) {
+            CryptoCategory categoryToDelete = categoryOptional.get();
+            System.out.println("Deleting category: " + categoryToDelete.getCategoryName());
+            categoryRepository.delete(categoryToDelete);
+            System.out.println("Category deleted successfully.");
         } else {
+            System.out.println("Category with id " + id + " not found.");
             throw new RuntimeException("Category with id " + id + " not found.");
+        }
+    }
+    @Transactional
+    public void deleteCategoryByName(String categoryName) {
+        CryptoCategory category = categoryRepository.findByCategoryName(categoryName);
+        if (category != null) {
+            categoryRepository.delete(category);
+        } else {
+            throw new IllegalArgumentException("Category not found: " + categoryName);
         }
     }
 

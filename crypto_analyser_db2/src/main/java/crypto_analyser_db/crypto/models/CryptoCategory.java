@@ -32,7 +32,7 @@ public class CryptoCategory {
      * A set of CryptoModel instances that belong to this category.
      * The relationship is defined as a one-to-many mapping.
      */
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<CryptoModel> cryptocurrencies;
 
     /**

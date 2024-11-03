@@ -24,6 +24,12 @@ public interface CryptoCategoryService {
     void deleteCategory(Long id);
 
 	void save(CryptoCategory category);
+	
+	void deleteCategoryByName(String categoryName);
+
+	
+
+	
 
 
 

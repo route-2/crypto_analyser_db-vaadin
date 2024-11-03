@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface CryptoCategoryRepository extends CrudRepository<CryptoCategory, Long> {
     
 	CryptoCategory findByCategoryName(String categoryName);
+	
+	    void deleteByCategoryName(String categoryName);
 }
