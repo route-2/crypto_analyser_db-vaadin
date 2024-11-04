@@ -2,7 +2,9 @@ package crypto_analyser_db.crypto.serviceimpl;
 
 import crypto_analyser_db.crypto.exceptions.CryptoNotFoundExceptions;
 import crypto_analyser_db.crypto.models.CryptoModel;
+import crypto_analyser_db.crypto.repository.CryptoCategoryRepository;
 import crypto_analyser_db.crypto.repository.CryptoRepository;
+import crypto_analyser_db.crypto.services.CryptoCategoryService;
 import crypto_analyser_db.crypto.services.CryptoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,7 @@ public  class CryptoServiceImpl implements CryptoService {
     @Override
     public CryptoModel getCryptoById(Long id) {
         Optional<CryptoModel> cryptoOptional = cryptoRepository.findById(id);
+        
        
         if (cryptoOptional.isPresent()) {
             return cryptoOptional.get();  // Return the found cryptocurrency
@@ -65,6 +68,7 @@ public  class CryptoServiceImpl implements CryptoService {
         if (cryptoRepository.findByName(newCrypto.getName()).isPresent()) {
             return false;  // Return false if the crypto already exists
         }
+        
         cryptoRepository.save(newCrypto);  // Save the new cryptocurrency to the database
         return true;
     }

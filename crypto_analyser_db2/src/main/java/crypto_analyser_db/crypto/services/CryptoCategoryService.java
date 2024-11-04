@@ -27,6 +27,10 @@ public interface CryptoCategoryService {
 	
 	void deleteCategoryByName(String categoryName);
 
+	Long findCategoryIdByName(String categoryName);
+
+
+
 	
 
 	

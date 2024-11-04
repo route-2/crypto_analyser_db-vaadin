@@ -32,7 +32,7 @@ public class CryptoCategory {
      * A set of CryptoModel instances that belong to this category.
      * The relationship is defined as a one-to-many mapping.
      */
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private Set<CryptoModel> cryptocurrencies;
 
     /**
@@ -109,6 +109,7 @@ public class CryptoCategory {
      * @return a set of CryptoModel instances in this category
      */
     public Set<CryptoModel> getCryptocurrencies() {
+      
         return cryptocurrencies;
     }
 

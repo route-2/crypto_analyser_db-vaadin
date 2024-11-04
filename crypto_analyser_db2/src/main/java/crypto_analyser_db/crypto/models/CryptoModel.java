@@ -31,6 +31,8 @@ public class CryptoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+
+    
     // Represents the rank of the cryptocurrency
     @Column(name = "ranking")
     @JsonProperty("ranking")
@@ -69,6 +71,9 @@ public class CryptoModel {
     // Represents the trading volume of the cryptocurrency
     @Column(name = "volume")
     private long volume;
+    
+    @Column(name = "category_id", nullable = false)
+    private Long categoryId;
     
     
  
@@ -207,6 +212,10 @@ public class CryptoModel {
                 ", volume=" + volume +
                 ", catogory" + category +
                 '}';
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
 	

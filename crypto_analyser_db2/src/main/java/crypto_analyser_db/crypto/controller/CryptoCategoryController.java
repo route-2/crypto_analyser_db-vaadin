@@ -2,7 +2,10 @@ package crypto_analyser_db.crypto.controller;
 
 
 import crypto_analyser_db.crypto.models.CryptoCategory;
+import crypto_analyser_db.crypto.repository.CryptoCategoryRepository;
 import crypto_analyser_db.crypto.services.CryptoCategoryService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +18,17 @@ import java.util.Optional;
 public class CryptoCategoryController {
 
     private final CryptoCategoryService categoryService;
+    @Autowired
+    private CryptoCategoryRepository categoryRepository;
 
     public CryptoCategoryController(CryptoCategoryService categoryService) {
         this.categoryService = categoryService;
+    }
+    
+ // Endpoint to get category ID by name
+    @GetMapping("/categoryId")
+    public Long getCategoryIdByName(@RequestParam String categoryName) {
+        return categoryRepository.findIdByName(categoryName);
     }
 
     // Get all categories

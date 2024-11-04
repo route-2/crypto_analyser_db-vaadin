@@ -3,6 +3,8 @@ package crypto_analyser_db.crypto.serviceimpl;
 import crypto_analyser_db.crypto.models.CryptoCategory;
 import crypto_analyser_db.crypto.repository.CryptoCategoryRepository;
 import crypto_analyser_db.crypto.services.CryptoCategoryService;
+
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +38,7 @@ public  class CryptoCategoryServiceImpl implements CryptoCategoryService {
      * @return a list of all CryptoCategory objects
      */
     @Override
+    @Transactional
     public List<CryptoCategory> getAllCategories() {
         return (List<CryptoCategory>) categoryRepository.findAll();
     }
@@ -47,7 +50,10 @@ public  class CryptoCategoryServiceImpl implements CryptoCategoryService {
      * @return an Optional containing the found CryptoCategory, or an empty Optional if not found
      */
     @Override
+    @Transactional
     public Optional<CryptoCategory> getCategoryById(Long id) {
+    	
+    	 Hibernate.initialize( categoryRepository.findById(id));
         return categoryRepository.findById( id);
     }
 
@@ -142,6 +148,12 @@ public  class CryptoCategoryServiceImpl implements CryptoCategoryService {
         
         // Save the category to the database
         categoryRepository.save(category);
+    }
+    
+    @Override
+    @Transactional
+    public Long findCategoryIdByName(String categoryName) {
+        return categoryRepository.findIdByName(categoryName);
     }
 
    

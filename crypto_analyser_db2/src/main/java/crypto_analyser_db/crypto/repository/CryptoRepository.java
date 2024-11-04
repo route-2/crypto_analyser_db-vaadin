@@ -55,6 +55,8 @@ public interface CryptoRepository extends JpaRepository<CryptoModel, Long> {
      */
     @NonNull
 	List<CryptoModel> findAll();
+
+	
     
     
     
