@@ -19,39 +19,20 @@ CREATE TABLE IF NOT EXISTS crypto (
     CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES crypto_category(id)
 );
 
--- Insert data into crypto_category
-INSERT INTO crypto_category (category_name) VALUES ('Stablecoin');
-INSERT INTO crypto_category (category_name) VALUES ('Utility');
-INSERT INTO crypto_category (category_name) VALUES ('Payment');
-INSERT INTO crypto_category (category_name) VALUES ('Meme Coin');
+-- Insert categories into crypto_category table
+INSERT IGNORE INTO crypto_category (category_name) VALUES ('Stablecoin');
+INSERT IGNORE INTO crypto_category (category_name) VALUES ('Utility');
+INSERT IGNORE INTO crypto_category (category_name) VALUES ('Payment');
+INSERT IGNORE INTO crypto_category (category_name) VALUES ('Meme Coin');
 
--- Insert data into crypto (Assign category_id to match crypto_category entries)
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(1, 'Bitcoin', 'BTC', 58757.01, 0.8, 5.1, 479140000, 1160743, 2);
-
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(2, 'Ethereum', 'ETH', 2507.13, 0.4, 2.9, 234630000, 301541, 2);
-
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(3, 'Tether', 'USDT', 0.9999, 0.1, 0.0, 669630000, 118060, 1);
-
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(4, 'BNB', 'BNB', 529.93, 0.9, 3.4, 122170000, 774673, 2);
-
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(5, 'Solana', 'SOL', 142.32, 0.2, 7.9, 41700000, 662857, 3);
-
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(6, 'USDC', 'USDC', 0.9999, 0.1, 0.0, 102390000, 344325, 1);
-
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(7, 'XRP', 'XRP', 0.5682, 0.5, 4.6, 188630000, 319617, 3);
-
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(8, 'Dogecoin', 'DOGE', 0.09879, 1.1, 4.7, 79002000, 143875, 4);
-
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(9, 'Polkadot', 'DOT', 4.24, 1.2, 6.8, 220840000, 595964, 2);
-
-INSERT INTO crypto (ranking, name_e, symbol, price, one_hour_change, twenty_four_hour_change, market_cap, volume, category_id) VALUES
-(10, 'Chainlink', 'LINK', 11.27, 0.9, 2.3, 432560000, 687525, 2);
+-- Insert cryptos into crypto table 
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (479140000, 'Bitcoin', 0.8, 58757.01, 1, 'BTC', 5.1, 1160743, 1);
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (234630000, 'Ethereum', 0.4, 2507.13, 2, 'ETH', 2.9, 301541, 2);
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (669630000, 'Tether', 0.1, 0.9999, 3, 'USDT', 0.0, 118060, 1);
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (122170000, 'BNB', 0.9, 529.93, 4, 'BNB', 3.4, 774673, 2);
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (41700000, 'Solana', 0.2, 142.32, 5, 'SOL', 7.9, 662857, 3);
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (102390000, 'USDC', 0.1, 0.9999, 6, 'USDC', 0.0, 344325, 1);
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (188630000, 'XRP', 0.5, 0.5682, 7, 'XRP', 4.6, 319617, 3);
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (79002000, 'Dogecoin', 1.1, 0.09879, 8, 'DOGE', 4.7, 143875, 4);
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (220840000, 'Polkadot', 1.2, 4.24, 9, 'DOT', 6.8, 595964, 2);
+INSERT IGNORE INTO crypto (market_cap, name_e, one_hour_change, price, ranking, symbol, twenty_four_hour_change, volume, category_id) VALUES (432560000, 'Chainlink', 0.9, 11.27, 10, 'LINK', 2.3, 687525, 2);

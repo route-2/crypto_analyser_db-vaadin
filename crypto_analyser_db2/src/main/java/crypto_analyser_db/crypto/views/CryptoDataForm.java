@@ -4,6 +4,7 @@ package crypto_analyser_db.crypto.views;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
@@ -67,6 +68,11 @@ public class CryptoDataForm extends FormLayout {
         // Add the button layout to the form
         add(buttonLayout);
     }
+    private void refreshData() {
+        List<CryptoModel> cryptoList = cryptoService.getAllCryptos();
+        clearForm();
+    }
+
 
     private List<String> getCategoryNames() {
         // Fetch all category names from the service
@@ -86,7 +92,7 @@ public class CryptoDataForm extends FormLayout {
             twentyFourHourChangeField.setValue(crypto.getTwentyFourHourChange());
             marketCapField.setValue((double) crypto.getMarketCap());
             volumeField.setValue((double) crypto.getVolume());
-            categoryField.setValue(crypto.getCategory().getCategoryName()); // Set category name
+            categoryField.setValue(crypto.getCategory().getCategoryName()); 
         } else {
             clearForm();
         }
@@ -103,6 +109,7 @@ public class CryptoDataForm extends FormLayout {
         categoryField.clear();
         currentCrypto = null;
     }
+    
 
     private void save() {
         if (nameField.isEmpty() || symbolField.isEmpty() || priceField.isEmpty()) {
@@ -133,26 +140,24 @@ public class CryptoDataForm extends FormLayout {
         currentCrypto.setMarketCap(marketCapField.getValue().intValue());
         currentCrypto.setVolume(volumeField.getValue().longValue());
         currentCrypto.setCategory(category);
-        currentCrypto.setCategoryId(category.getId()); 
 
-        // Save the crypto data and get the result
-        boolean isSaved = cryptoService.addCrypto(currentCrypto); 
-        if (isSaved) {
-            Notification.show("Crypto data saved");
-            clearForm(); // Optionally clear the form after successful save
-        } else {
-            Notification.show("Failed to save crypto data");
-        }
+        // Save currentCrypto to the database
+        cryptoService.addCrypto(currentCrypto);
+        Notification.show("Crypto saved successfully", 3000, Notification.Position.MIDDLE);
+        clearForm();  // Clear the form after saving
     }
-
 
     private void delete() {
         if (currentCrypto != null) {
-            Long id = currentCrypto.getId(); // Use the ID from the currentCrypto
+            Long id = currentCrypto.getId(); 
             boolean isDeleted = cryptoService.deleteCrypto(id);
+            
             if (isDeleted) {
-                Notification.show("Crypto data deleted");
+                // Clear the form and refresh the data
                 clearForm();
+                refreshData(); 
+                
+                Notification.show("Crypto data deleted");
             } else {
                 Notification.show("Failed to delete crypto data");
             }
@@ -160,6 +165,7 @@ public class CryptoDataForm extends FormLayout {
             Notification.show("No crypto selected to delete");
         }
     }
+
     
     
     private void update() {
@@ -182,7 +188,7 @@ public class CryptoDataForm extends FormLayout {
         CryptoCategory category = categoryService.getCategoryByName(categoryName);
         if (category != null) {
             currentCrypto.setCategory(category);
-            currentCrypto.setCategoryId(category.getId()); 
+           
         } else {
             Notification.show("Category not found: " + categoryName, 3000, Notification.Position.MIDDLE);
             return; // Stop the update operation if category is not found

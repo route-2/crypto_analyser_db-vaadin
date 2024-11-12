@@ -12,7 +12,7 @@ import jakarta.annotation.security.PermitAll;
 
 import java.util.List;
 
-@Route("crypto")
+@Route(value = "", layout = MainLayout.class)
 @PermitAll
 public class CryptoDataView extends VerticalLayout {
 
@@ -45,10 +45,17 @@ public class CryptoDataView extends VerticalLayout {
     }
 
     private List<CryptoModel> getCryptoList() {
-        return cryptoService.getAllCryptos(); // Assuming you have a method to get all crypto data
-    }
+    	 List<CryptoModel> cryptos = cryptoService.getAllCryptos();
+    	 if (cryptos.isEmpty()) {
+    	        System.out.println("No data found");
+    	        Notification.show("No data found");
+    	    }
+    	cryptos.forEach(crypto -> System.out.println(crypto.getName()));
+        return cryptoService.getAllCryptos(); 
+        }
 
     private void refreshGrid() {
+    	
         cryptoGrid.setItems(getCryptoList());
         Notification.show("Crypto data refreshed");
     }

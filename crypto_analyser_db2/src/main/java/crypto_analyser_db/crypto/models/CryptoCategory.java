@@ -23,9 +23,10 @@ public class CryptoCategory {
     /**
      * The name of the category, must be unique and not null.
      */
-    @Column(name = "category_name", nullable = false, unique = true)
+    @Column(name = "category_name",nullable = true, unique = true)
     private String categoryName;
-    
+  
+    @Column(name = "name")
     private String name;
 
     /**

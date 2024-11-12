@@ -2,6 +2,7 @@ package crypto_analyser_db.crypto.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,9 +21,8 @@ import jakarta.persistence.Table;
 @Table(name="crypto")  // Maps this class to the "crypto" table in the database
 public class CryptoModel {
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_name", nullable = false)
-    private CryptoCategory category;
-	
+	@JoinColumn(name = "category_id", nullable = false)
+	private CryptoCategory category;
 	
 
 
@@ -31,6 +31,7 @@ public class CryptoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+  
 
     
     // Represents the rank of the cryptocurrency
@@ -72,8 +73,7 @@ public class CryptoModel {
     @Column(name = "volume")
     private long volume;
     
-    @Column(name = "category_id", nullable = false)
-    private Long categoryId;
+   
     
     
  
@@ -214,9 +214,7 @@ public class CryptoModel {
                 '}';
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
+   
 
 	
 }
